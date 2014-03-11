@@ -1,0 +1,22 @@
+{
+  "name": "HomeCare",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "engines": {
+    "node": ">=0.11.9"
+  },
+  "main": "./server.js",
+  "scripts": {
+    "start": "node --harmony server.js"
+  },
+  "dependencies": {
+    "koa": "~0.5.1",
+    "koa-common": "~1.2.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.5.5",
+    "gulp-watch": "~0.5.2"
+  }
+}
