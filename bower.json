@@ -1,0 +1,20 @@
+{
+  "name": "HomeCare",
+  "version": "0.0.1",
+  "homepage": "https://github.com/chmontgomery/HomeCare",
+  "authors": [
+    "Chris Montgomery <christopher.montgomery@dowjones.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.14"
+  }
+}
