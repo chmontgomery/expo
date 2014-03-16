@@ -1,0 +1,43 @@
+<div class="container calendar-container">
+    <table>
+        <tr>
+            <td>
+                <h2>&nbsp;</h2>
+                <table class="calendar-table table-bordered">
+                    <tr>
+                        <th>
+                            Medication
+                        </th>
+                    </tr>
+                    <tr ng-repeat="med in meds" class="cal-cell">
+                        <td>
+                            {{ med.name }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td ng-repeat="day in days">
+                            <h2>{{ day.date }}</h2>
+                            <table class="calendar-table table-bordered table-scrolling">
+                                <tr>
+                                    <th ng-repeat="date in dates">
+                                        {{ date.hour }}:00
+                                    </th>
+                                </tr>
+                                <tr ng-repeat="med in meds">
+                                    <td ng-repeat="date in dates" class="time-slot cal-cell"
+                                        ng-click="editMedTime(med.id, day.date, date.hour)">
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

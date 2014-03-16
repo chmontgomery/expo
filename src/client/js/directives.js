@@ -3,19 +3,21 @@
 
   var module = angular.module('HomeCare.directives', []);
 
-  module.controller('navbarCtrl', ['$scope', '$location',
-    function($scope, $location) {
-      $scope.changeView = function(view){
-        $location.path(view);
-      };
-    }]);
-
   module.directive('navbar', function() {
     return {
       restrict: "E",
       replace: true,
-      controller: 'navbarCtrl',
+      controller: 'NavbarCtrl',
       templateUrl: 'partials/navbar.html'
+    };
+  });
+
+  module.directive('home', function() {
+    return {
+      restrict: "E",
+      replace: true,
+      controller: 'HomeCtrl',
+      templateUrl: 'partials/home.html'
     };
   });
 

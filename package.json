@@ -26,6 +26,8 @@
     "gulp-util": "~2.2.14",
     "gulp-clean": "~0.2.4",
     "gulp-uglify": "~0.2.1",
-    "gulp-concat": "~2.1.7"
+    "gulp-concat": "~2.1.7",
+    "gulp-less": "~1.2.3",
+    "gulp-livereload": "~1.2.0"
   }
 }
