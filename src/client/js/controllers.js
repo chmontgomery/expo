@@ -14,11 +14,11 @@
       }
 
       $scope.days = [{
-        date: '3/16/14'
-      },{
         date: '3/17/14'
       },{
         date: '3/18/14'
+      },{
+        date: '3/19/14'
       }];
 
       $scope.meds = [{
@@ -34,15 +34,17 @@
 
       $scope.editMedTime = function(medId, date, hour) {
         console.log(medId,date,hour);
-
       };
+
+      $scope.schedule = [{
+        date: '3/16/14',
+        time: 7,
+        medId: 1,
+        notes: 'give orally'
+      }];
     }]);
 
-  module.controller('NavbarCtrl', ['$scope', '$location',
-    function($scope, $location) {
-      $scope.changeView = function(view){
-        $location.path(view);
-      };
-    }]);
+  module.controller('NavbarCtrl', ['$scope',
+    function($scope) {}]);
 
 })();

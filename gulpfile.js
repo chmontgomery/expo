@@ -26,7 +26,9 @@ var bowerFiles = [
   './bower_components/bootstrap/dist/js/bootstrap.js',
   './bower_components/bootstrap/dist/js/bootstrap.min.js',
   './bower_components/lodash/dist/lodash.js',
-  './bower_components/lodash/dist/lodash.min.js'
+  './bower_components/lodash/dist/lodash.min.js',
+  './bower_components/moment/moment.js',
+  './bower_components/moment/moment/min/moment.min.js'
 ];
 
 gulp.task('clean', function () {
