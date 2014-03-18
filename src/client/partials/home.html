@@ -1,43 +1,49 @@
-<div class="container calendar-container">
+<div class="container">
+  <div class="calendar-container">
     <table>
-        <tr>
-            <td>
-                <h2>&nbsp;</h2>
-                <table class="calendar-table table-bordered">
+      <tr>
+        <td>
+          <div class="fix-left">
+            <h2>&nbsp;</h2>
+            <table class="calendar-table table-bordered">
+              <tr>
+                <th>
+                  Medication
+                </th>
+              </tr>
+              <tr ng-repeat="med in meds" class="cal-cell">
+                <td>
+                  {{ med.name }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td>
+          <div class="scollable-right">
+            <table>
+              <tr>
+                <td ng-repeat="day in days">
+                  <h2>{{ day.date }}</h2>
+                  <table class="calendar-table table-bordered table-scrolling">
                     <tr>
-                        <th>
-                            Medication
-                        </th>
+                      <th ng-repeat="date in dates">
+                        {{ date.hour }}:00
+                      </th>
                     </tr>
-                    <tr ng-repeat="med in meds" class="cal-cell">
-                        <td>
-                            {{ med.name }}
-                        </td>
+                    <tr ng-repeat="med in meds">
+                      <td ng-repeat="date in dates" class="time-slot cal-cell"
+                          ng-click="editMedTime(med.id, day.date, date.hour)">
+                        &nbsp;
+                      </td>
                     </tr>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <td ng-repeat="day in days">
-                            <h2>{{ day.date }}</h2>
-                            <table class="calendar-table table-bordered table-scrolling">
-                                <tr>
-                                    <th ng-repeat="date in dates">
-                                        {{ date.hour }}:00
-                                    </th>
-                                </tr>
-                                <tr ng-repeat="med in meds">
-                                    <td ng-repeat="date in dates" class="time-slot cal-cell"
-                                        ng-click="editMedTime(med.id, day.date, date.hour)">
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
     </table>
+  </div>
 </div>

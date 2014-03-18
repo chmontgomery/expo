@@ -14,7 +14,17 @@
   }
 }
 .calendar-container {
-  overflow-x: scroll;
+  position: relative;
+  .fix-left {
+    position: absolute;
+  }
+  .scollable-right {
+    position: absolute;
+    left: 100px;
+    overflow-x: scroll;
+    right: 0px;
+    top: 0px;
+  }
 }
 .day {
   float: left;
