@@ -4,6 +4,7 @@
   angular.module('HomeCare', [
     'HomeCare.directives',
     'HomeCare.controllers',
+    'HomeCare.services'
   ]);
 
 })();

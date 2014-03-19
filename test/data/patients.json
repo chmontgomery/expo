@@ -1,0 +1,30 @@
+{
+  "patients": [{
+    "id": "1",
+    "fullName": "Chris Montgomery",
+    "meds": [{
+      "id": "1",
+      "name": "Imetrix"
+    },{
+      "id": "2",
+      "name": "Zimotriptan"
+    },{
+      "id": "3",
+      "name": "Blaboblop"
+    }]
+  },{
+    "id": "2",
+    "fullName": "Jesse Gavin",
+    "meds": [{
+      "id": "4",
+      "name": "BleepoBlorp"
+    }]
+  },{
+    "id": "3",
+    "fullName": "John Doe",
+    "meds": [{
+      "id": "2",
+      "name": "Zimotriptan"
+    }]
+  }]
+}
