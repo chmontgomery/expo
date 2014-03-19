@@ -6,21 +6,12 @@
   module.controller('HomeCtrl', ['$scope', '$q',
     'patientService', 'scheduleService',
     function ($scope, $q, patientService, scheduleService) {
-      $scope.dates = [];
 
-      for (var i = 0; i < 24; i++) {
-        $scope.dates.push({
-          hour: i
-        });
-      }
-
-      $scope.day = moment(); // default to today
-
-      $scope.momentForDisplay = function (m) {
-        return m.format('MM/DD/YYYY');
-      };
-
-      function resolveAllData() {
+      /**
+       * extracted into function so calculation is done
+       * only on demand so it's not done on every $digest
+       */
+      function recombineAllData() {
         var combined = _.cloneDeep($scope.patients);
         _.each($scope.schedule, function(s) {
           var patient = _.find(combined, function(p) {
@@ -39,18 +30,32 @@
         $scope.allPatients = combined;
       }
 
+      $scope.dates = [];
+
+      for (var i = 0; i < 24; i++) {
+        $scope.dates.push({
+          hour: i
+        });
+      }
+
+      $scope.day = moment(); // default to today
+
+      $scope.momentForDisplay = function (m) {
+        return m.format('MM/DD/YYYY');
+      };
+
       $scope.patients = [];
 
       patientService.getPatients().then(function (data) {
         $scope.patients = data.patients;
-        resolveAllData();
+        recombineAllData();
       });
 
       $scope.schedule = [];
 
       scheduleService.getSchedule().then(function (data) {
         $scope.schedule = data.schedule;
-        resolveAllData();
+        recombineAllData();
       });
 
       $scope.allPatients = [];
