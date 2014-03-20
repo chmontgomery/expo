@@ -20,23 +20,51 @@
   }
 
   angular.module('HomeCare.services', [])
-    .factory('patientService', ['$q', '$http', function ($q, $http) {
-      return {
-        getPatients: function () {
-          return getRequest($q, $http, '/patients');
-        },
-        getPatient: function (id) {
-          return getRequest($q, $http, '/patients/'+id);
-        }
-      };
-    }])
+    .factory('patientService', ['$q', '$http',
+      'scheduleService', 'medicationService',
+      function ($q, $http, scheduleService, medicationService) {
+        return {
+          getPatients: function () {
+            return getRequest($q, $http, '/patients');
+          },
+          getPatient: function (id) {
+            return getRequest($q, $http, '/patients/' + id);
+          },
+          createFullPatient: function (patient, schedules, allMedications) {
+            patient.schedules = schedules;
+
+            _.each(_.cloneDeep(patient.medications), function (patientMed, i) {
+              var medication = _.find(allMedications, function (med) {
+                return med.id === patientMed.id;
+              });
+              patient.medications[i] = _.assign({}, patientMed, medication);
+            });
+
+            return patient;
+          },
+          getFullPatient: function (id) {
+            var self = this;
+            return $q.all([
+                self.getPatient(id),
+                scheduleService.getSchedule(id),
+                medicationService.getMedications()
+              ]).then(function (res) {
+                var patient = res[0],
+                  schedules = res[1].schedules,
+                  medications = res[2].medications;
+
+                return self.createFullPatient(patient, schedules, medications);
+              });
+          }
+        };
+      }])
     .factory('scheduleService', ['$q', '$http', function ($q, $http) {
       return {
         getSchedules: function () {
           return getRequest($q, $http, '/schedules');
         },
-        getSchedule: function (id) {
-          return getRequest($q, $http, '/schedules/'+id);
+        getSchedule: function (patientId) {
+          return getRequest($q, $http, '/schedules/' + patientId);
         }
       };
     }])
@@ -46,7 +74,7 @@
           return getRequest($q, $http, '/medications');
         },
         getMedication: function (id) {
-          return getRequest($q, $http, '/medications/'+id);
+          return getRequest($q, $http, '/medications/' + id);
         }
       };
     }]);

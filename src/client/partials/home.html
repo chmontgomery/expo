@@ -1,45 +1,47 @@
 <div class="container">
-  <div class="calendar-container">
-    <table>
-      <tr>
-        <td>
-          <div class="fix-left">
-            <h2>&nbsp;</h2>
-            <div ng-repeat="patient in allPatients">
-              <table class="calendar-table table-bordered">
-                <tr >
-                  <th>Patient</th>
-                  <th>Medication</th>
-                </tr>
-                <tr ng-repeat="med in patient.meds" class="cal-cell">
-                  <td>{{ patient.fullName }}</td>
-                  <td>{{ med.name }}</td>
-                </tr>
-              </table>
+
+  View Patient: <select ng-model="selectedPatient" ng-options="p.fullName for p in patients">
+    <option value="">-- choose --</option>
+  </select>
+
+  <div ng-if="patient">
+    <h1>{{ selectedPatient.fullName }}</h1>
+    <div class="calendar-container">
+      <table>
+        <tr>
+          <td>
+            <div class="fix-left">
+              <h2>&nbsp;</h2>
+                <table class="calendar-table table-bordered">
+                  <tr >
+                    <th>Medication</th>
+                  </tr>
+                  <tr ng-repeat="med in patient.medications" class="cal-cell">
+                    <td>{{ med.name }}</td>
+                  </tr>
+                </table>
             </div>
-          </div>
-        </td>
-        <td>
-          <div class="scollable-right">
-            <h2>{{ momentForDisplay(day) }}</h2>
-            <div ng-repeat="patient in allPatients">
-              <table class="calendar-table table-bordered">
-                <tr >
-                  <th ng-repeat="date in dates">
-                    {{ date.hour }}:00
-                  </th>
-                </tr>
-                <tr ng-repeat="med in patient.meds" class="cal-cell">
-                  <td ng-repeat="date in dates" class="time-slot cal-cell"
-                      ng-click="editMedTime(med.id, day.date, date.hour)">
-                    &nbsp;
-                  </td>
-                </tr>
-              </table>
+          </td>
+          <td>
+            <div class="scollable-right">
+              <h2>{{ momentForDisplay(day) }}</h2>
+                <table class="calendar-table table-bordered">
+                  <tr >
+                    <th ng-repeat="date in dates">
+                      {{ date.hour }}:00
+                    </th>
+                  </tr>
+                  <tr ng-repeat="med in patient.medications" class="cal-cell">
+                    <td ng-repeat="date in dates" class="time-slot cal-cell"
+                        ng-click="editMedTime(med.id, date.hour)">
+                      &nbsp;
+                    </td>
+                  </tr>
+                </table>
             </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
