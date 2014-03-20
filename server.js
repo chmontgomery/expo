@@ -7,7 +7,8 @@ var koa = require('koa'),
   app = koa(),
   homeController = require('./src/controllers/home'),
   patientController = require('./src/controllers/patient'),
-  scheduleController = require('./src/controllers/schedule');
+  scheduleController = require('./src/controllers/schedule'),
+  medicationController = require('./src/controllers/medication');
 
 app.use(common.logger());
 app.use(common.responseTime());
@@ -15,9 +16,12 @@ app.use(common.responseTime());
 app.use(serve(path.join(__dirname, '/dist')));
 
 app.use(route.get('/', homeController));
-app.use(route.get('/patients', patientController));
-app.use(route.get('/schedule', scheduleController));
+app.use(route.get('/patients', patientController.list));
+app.use(route.get('/patients/:id', patientController.show));
+app.use(route.get('/schedules', scheduleController.list));
+app.use(route.get('/schedules/:patientId', scheduleController.show));
+app.use(route.get('/medications', medicationController.list));
+app.use(route.get('/medications/:id', medicationController.show));
 
-http.createServer(app.callback()).listen(3000);
-//https.createServer(app.callback()).listen(3001);
-console.log('listening on port 3000');
+http.createServer(app.callback()).listen(1337);
+console.log('listening on port 1337');

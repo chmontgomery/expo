@@ -1,30 +1,47 @@
 {
-  "patients": [{
-    "id": "1",
-    "fullName": "Chris Montgomery",
-    "meds": [{
+  "patients": [
+    {
       "id": "1",
-      "name": "Imetrix"
-    },{
+      "fullName": "Chris Montgomery",
+      "medication": [
+        {
+          "id": "1"
+        },
+        {
+          "id": "2"
+        },
+        {
+          "id": "3"
+        }
+      ]
+    },
+    {
       "id": "2",
-      "name": "Zimotriptan"
-    },{
+      "fullName": "Jesse Gavin",
+      "medication": [
+        {
+          "id": "4"
+        }
+      ]
+    },
+    {
       "id": "3",
-      "name": "Blaboblop"
-    }]
-  },{
-    "id": "2",
-    "fullName": "Jesse Gavin",
-    "meds": [{
+      "fullName": "John Doe",
+      "medication": [
+        {
+          "id": "2"
+        }
+      ]
+    },
+    {
       "id": "4",
-      "name": "BleepoBlorp"
-    }]
-  },{
-    "id": "3",
-    "fullName": "John Doe",
-    "meds": [{
-      "id": "2",
-      "name": "Zimotriptan"
-    }]
-  }]
+      "fullName": "Dup",
+      "medication": []
+    },
+    {
+      "id": "4",
+      "fullName": "Dup",
+      "medication": []
+    }
+  ]
 }
