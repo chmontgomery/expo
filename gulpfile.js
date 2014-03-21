@@ -4,6 +4,8 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   clean = require('gulp-clean'),
   less = require('gulp-less'),
+  minifyCSS = require('gulp-minify-css'),
+  uglify = require('gulp-uglify'),
   karma = require('gulp-karma'),
   runSequence = require('run-sequence'),
   livereload = require('gulp-livereload');
@@ -46,14 +48,14 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('bowerFiles', function () {
+gulp.task('bower-files', function () {
   // the base option sets the relative root for the set of files,
   // preserving the folder structure
   return gulp.src(bowerFiles, { base: './bower_components/' })
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('bowerFilesMin', function () {
+gulp.task('bower-files-min', function () {
   // the base option sets the relative root for the set of files,
   // preserving the folder structure
   return gulp.src(bowerFilesMin, { base: './bower_components/' })
@@ -63,15 +65,28 @@ gulp.task('bowerFilesMin', function () {
 gulp.task('styles', function () {
   return gulp.src(paths.less)
     .pipe(less())
-    //.pipe(minifyCSS())
+    .pipe(gulp.dest('./dist/css'));
+});
+
+gulp.task('styles-min', function () {
+  return gulp.src(paths.less)
+    .pipe(less())
+    .pipe(minifyCSS())
     .pipe(gulp.dest('./dist/css'));
 });
 
 gulp.task('scripts', function () {
   // Minify and copy all JavaScript (except vendor scripts)
   return gulp.src(paths.scripts)
-    //.pipe(uglify())
     .pipe(concat('all.js'))
+    .pipe(gulp.dest('./dist/js'));
+});
+
+gulp.task('scripts-min', function () {
+  // Minify and copy all JavaScript (except vendor scripts)
+  return gulp.src(paths.scripts)
+    .pipe(uglify())
+    .pipe(concat('all.min.js'))
     .pipe(gulp.dest('./dist/js'));
 });
 
@@ -88,7 +103,7 @@ gulp.task('watch', function () {
       paths.scripts,
       paths.partials,
       paths.less
-    ], ['build']).on('change', function (file) {
+    ], ['build-dev']).on('change', function (file) {
       server.changed(file.path);
     });
 });
@@ -106,7 +121,14 @@ gulp.task('test', function () {
     });
 });
 
-gulp.task('dist', ['bowerFiles', 'scripts', 'partials', 'styles']);
+gulp.task('dist-dev', ['bower-files', 'scripts', 'partials', 'styles']);
+gulp.task('dist', ['bower-files-min', 'scripts-min', 'partials', 'styles-min']);
+
+gulp.task('build-dev', function(callback) {
+  runSequence('clean',
+    ['dist-dev'],
+    callback);
+});
 
 gulp.task('build', function(callback) {
   runSequence('clean',
