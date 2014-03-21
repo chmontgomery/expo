@@ -5,6 +5,7 @@ var gulp = require('gulp'),
   clean = require('gulp-clean'),
   less = require('gulp-less'),
   karma = require('gulp-karma'),
+  runSequence = require('run-sequence'),
   livereload = require('gulp-livereload');
 
 var paths = {
@@ -18,43 +19,55 @@ var paths = {
 
 var bowerFiles = [
   './bower_components/angular/angular.js',
-  //'./bower_components/angular/angular.min.js',
   './bower_components/angular-ui/build/angular-ui.js',
-  //'./bower_components/angular-ui/build/angular-ui.min.js',
   './bower_components/angular-ui/build/angular-ui.css',
-  //'./bower_components/angular-ui/build/angular-ui.min.css',
   './bower_components/jquery/dist/jquery.js',
-  //'./bower_components/jquery/dist/jquery.min.js',
   './bower_components/bootstrap/dist/css/bootstrap.css',
   './bower_components/bootstrap/dist/css/bootstrap-theme.css',
   './bower_components/bootstrap/dist/js/bootstrap.js',
-  //'./bower_components/bootstrap/dist/js/bootstrap.min.js',
   './bower_components/lodash/dist/lodash.js',
-  //'./bower_components/lodash/dist/lodash.min.js',
-  './bower_components/moment/moment.js',
-  //'./bower_components/moment/moment/min/moment.min.js'
+  './bower_components/moment/moment.js'
+];
+
+var bowerFilesMin = [
+  './bower_components/angular/angular.min.js',
+  './bower_components/angular-ui/build/angular-ui.min.js',
+  './bower_components/angular-ui/build/angular-ui.min.css',
+  './bower_components/jquery/dist/jquery.min.js',
+  './bower_components/bootstrap/dist/js/bootstrap.min.js',
+  './bower_components/bootstrap/dist/css/bootstrap.min.css',
+  './bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+  './bower_components/lodash/dist/lodash.min.js',
+  './bower_components/moment/moment/min/moment.min.js'
 ];
 
 gulp.task('clean', function () {
-  return gulp.src(['dist/*'], {read: false})
+  return gulp.src(['./dist/*'], {read: false})
     .pipe(clean());
 });
 
 gulp.task('bowerFiles', function () {
   // the base option sets the relative root for the set of files,
   // preserving the folder structure
-  gulp.src(bowerFiles, { base: './bower_components/' })
+  return gulp.src(bowerFiles, { base: './bower_components/' })
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('styles', function() {
-  gulp.src(paths.less)
+gulp.task('bowerFilesMin', function () {
+  // the base option sets the relative root for the set of files,
+  // preserving the folder structure
+  return gulp.src(bowerFilesMin, { base: './bower_components/' })
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('styles', function () {
+  return gulp.src(paths.less)
     .pipe(less())
     //.pipe(minifyCSS())
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
   // Minify and copy all JavaScript (except vendor scripts)
   return gulp.src(paths.scripts)
     //.pipe(uglify())
@@ -62,37 +75,43 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('partials', function() {
+gulp.task('partials', function () {
   // Minify and copy all JavaScript (except vendor scripts)
   return gulp.src(paths.partials)
     .pipe(gulp.dest('./dist/partials'));
 });
 
 // Rerun the task when a file changes
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   var server = livereload();
   gulp.watch([
-    paths.scripts,
-    paths.partials,
-    paths.less
-  ], ['build']).on('change', function(file) {
+      paths.scripts,
+      paths.partials,
+      paths.less
+    ], ['build']).on('change', function (file) {
       server.changed(file.path);
     });
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
   // Be sure to return the stream
   return gulp.src([paths.dist, paths.test_helpers, paths.scripts, paths.tests])
     .pipe(karma({
       configFile: 'karma.conf.js',
       action: 'run'
     }))
-    .on('error', function(err) {
+    .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
     });
 });
 
-gulp.task('dist', ['bowerFiles','scripts','partials','styles']);
-gulp.task('build', ['dist']);
+gulp.task('dist', ['bowerFiles', 'scripts', 'partials', 'styles']);
+
+gulp.task('build', function(callback) {
+  runSequence('clean',
+    ['dist'],
+    callback);
+});
+
 gulp.task('default', ['watch']);
