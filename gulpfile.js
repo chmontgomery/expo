@@ -25,7 +25,9 @@ var bowerFiles = [
   './bower_components/angular-ui/build/angular-ui.css',
   './bower_components/jquery/dist/jquery.js',
   './bower_components/bootstrap/dist/css/bootstrap.css',
+  './bower_components/bootstrap/dist/css/bootstrap.css.map',
   './bower_components/bootstrap/dist/css/bootstrap-theme.css',
+  './bower_components/bootstrap/dist/css/bootstrap-theme.css.map',
   './bower_components/bootstrap/dist/js/bootstrap.js',
   './bower_components/lodash/dist/lodash.js',
   './bower_components/moment/moment.js'
