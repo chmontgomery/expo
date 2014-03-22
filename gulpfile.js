@@ -15,7 +15,8 @@ var paths = {
   partials: './src/client/partials/**/*.html',
   less: './src/client/less/**/*.less',
   tests: './test/client/js/**/*.js',
-  test_helpers: './bower_components/angular-mocks/angular-mocks.js',
+  angular_mocks: './bower_components/angular-mocks/angular-mocks.js',
+  test_helpers: './test/client/js/helpers/testHelperService.js',
   dist: './dist/**/*.js'
 };
 
@@ -29,6 +30,7 @@ var bowerFiles = [
   './bower_components/bootstrap/dist/css/bootstrap-theme.css',
   './bower_components/bootstrap/dist/css/bootstrap-theme.css.map',
   './bower_components/bootstrap/dist/js/bootstrap.js',
+  './bower_components/bootstrap/dist/fonts/*',
   './bower_components/lodash/dist/lodash.js',
   './bower_components/moment/moment.js'
 ];
@@ -41,6 +43,7 @@ var bowerFilesMin = [
   './bower_components/bootstrap/dist/js/bootstrap.min.js',
   './bower_components/bootstrap/dist/css/bootstrap.min.css',
   './bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+  './bower_components/bootstrap/dist/fonts/*',
   './bower_components/lodash/dist/lodash.min.js',
   './bower_components/moment/moment/min/moment.min.js'
 ];
@@ -112,7 +115,7 @@ gulp.task('watch', function () {
 
 gulp.task('test', function () {
   // Be sure to return the stream
-  return gulp.src([paths.dist, paths.test_helpers, paths.scripts, paths.tests])
+  return gulp.src([paths.dist, paths.angular_mocks, paths.test_helpers, paths.scripts, paths.tests])
     .pipe(karma({
       configFile: 'karma.conf.js',
       action: 'run'

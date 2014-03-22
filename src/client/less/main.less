@@ -1,5 +1,11 @@
 .time-slot {
-  background-color: #f5f5f5;
+  background-color: white;
+  &:hover {
+    background-color: #ffff00;
+  }
+}
+.time-slot.past {
+  background-color: darkgray;
   &:hover {
     background-color: #ffff00;
   }
@@ -30,4 +36,8 @@
 }
 .day {
   float: left;
+}
+.is-med-schedule {
+   margin: auto;
+   width: 16px;
 }

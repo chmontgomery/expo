@@ -4,7 +4,7 @@
       "patientId": "1",
       "year": 2014,
       "month": 3,
-      "day": 18,
+      "day": 22,
       "time": 7,
       "medId": "1",
       "notes": "give orally"
@@ -13,16 +13,34 @@
       "patientId": "1",
       "year": 2014,
       "month": 3,
-      "day": 18,
-      "time": 7,
+      "day": 22,
+      "time": 12,
       "medId": "2",
+      "notes": "take with food"
+    },
+    {
+      "patientId": "1",
+      "year": 2014,
+      "month": 3,
+      "day": 22,
+      "time": 15,
+      "medId": "1",
+      "notes": "give orally"
+    },
+    {
+      "patientId": "1",
+      "year": 2014,
+      "month": 3,
+      "day": 22,
+      "time": 7,
+      "medId": "3",
       "notes": null
     },
     {
       "patientId": "2",
       "year": 2014,
       "month": 3,
-      "day": 18,
+      "day": 22,
       "time": 7,
       "medId": "1",
       "notes": null

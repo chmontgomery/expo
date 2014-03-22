@@ -31,13 +31,16 @@
             return getRequest($q, $http, '/patients/' + id);
           },
           createFullPatient: function (patient, schedules, allMedications) {
-            patient.schedules = schedules;
 
             _.each(_.cloneDeep(patient.medications), function (patientMed, i) {
               var medication = _.find(allMedications, function (med) {
                 return med.id === patientMed.id;
               });
               patient.medications[i] = _.assign({}, patientMed, medication);
+
+              patient.medications[i].schedules = _.filter(schedules, function(s) {
+                return s.patientId === patient.id && s.medId === patientMed.id;
+              });
             });
 
             return patient;

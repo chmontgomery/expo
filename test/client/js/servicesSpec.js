@@ -3,17 +3,20 @@
 describe('services', function () {
 
   beforeEach(module('HomeCare.services'));
+  beforeEach(module('TestHelper.services'));
 
   describe('patientService', function () {
     var $scope,
       $q,
-      patientService;
+      patientService,
+      testHelperService;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($injector) {
       $scope = $injector.get('$rootScope').$new();
       $q = $injector.get('$q');
       patientService = $injector.get('patientService');
+      testHelperService = $injector.get('testHelperService');
     }));
 
     it('should return inflated patient object', function () {
@@ -79,53 +82,7 @@ describe('services', function () {
 
       var result = patientService.createFullPatient(patient, schedules, allMedications);
 
-      expect(result).toEqual({
-        "id": "1",
-        "fullName": "Chris Montgomery",
-        "medications": [
-          {
-            "id": "1",
-            "name": "Imetrix"
-          },
-          {
-            "id": "2",
-            "name": "Zimotriptan"
-          },
-          {
-            "id": "3",
-            "name": "Blaboblop"
-          }
-        ],
-        schedules: [
-          {
-            "patientId": "1",
-            "year": 2014,
-            "month": 3,
-            "day": 18,
-            "time": 7,
-            "medId": "1",
-            "notes": "give orally"
-          },
-          {
-            "patientId": "1",
-            "year": 2014,
-            "month": 3,
-            "day": 18,
-            "time": 7,
-            "medId": "2",
-            "notes": null
-          },
-          {
-            "patientId": "2",
-            "year": 2014,
-            "month": 3,
-            "day": 18,
-            "time": 7,
-            "medId": "1",
-            "notes": null
-          }
-        ]
-      })
+      expect(result).toEqual(testHelperService.getFullPatient())
     });
   });
 });

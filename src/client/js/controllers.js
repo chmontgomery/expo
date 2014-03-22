@@ -43,6 +43,12 @@
       $scope.editMedTime = function (medId, hour) {
         console.log(medId, hour);
       };
+
+      $scope.isMedSchedule = function(date, schedules) {
+        return !!_.find(schedules, function(s) {
+          return s.time == date.hour;
+        });
+      };
     }]);
 
   module.controller('NavbarCtrl', ['$scope',

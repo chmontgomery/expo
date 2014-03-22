@@ -32,8 +32,11 @@
                     </th>
                   </tr>
                   <tr ng-repeat="med in patient.medications" class="cal-cell">
-                    <td ng-repeat="date in dates" class="time-slot cal-cell"
+                    <td ng-repeat="date in dates" class="time-slot cal-cell" ng-class="{past: date.hour < 9}"
                         ng-click="editMedTime(med.id, date.hour)">
+                      <div ng-if="isMedSchedule(date, med.schedules)" class="is-med-schedule">
+                        <div class="glyphicon glyphicon-remove"></div>
+                      </div>
                       &nbsp;
                     </td>
                   </tr>
