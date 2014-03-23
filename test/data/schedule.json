@@ -7,7 +7,8 @@
       "day": 22,
       "time": 7,
       "medId": "1",
-      "notes": "give orally"
+      "notes": "give orally",
+      "given": false
     },
     {
       "patientId": "1",
@@ -16,7 +17,8 @@
       "day": 22,
       "time": 12,
       "medId": "2",
-      "notes": "take with food"
+      "notes": "take with food",
+      "given": false
     },
     {
       "patientId": "1",
@@ -25,16 +27,18 @@
       "day": 22,
       "time": 15,
       "medId": "1",
-      "notes": "give orally"
+      "notes": "give orally",
+      "given": false
     },
     {
       "patientId": "1",
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 7,
+      "time": 8,
       "medId": "3",
-      "notes": null
+      "notes": null,
+      "given": true
     },
     {
       "patientId": "2",
@@ -43,7 +47,8 @@
       "day": 22,
       "time": 7,
       "medId": "1",
-      "notes": null
+      "notes": null,
+      "given": true
     }
   ]
 }

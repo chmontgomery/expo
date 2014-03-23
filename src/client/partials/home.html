@@ -6,12 +6,17 @@
 
   <div ng-if="patient">
     <h1>{{ selectedPatient.fullName }}</h1>
+    <h2>
+      <span class="glyphicon glyphicon-circle-arrow-left small"></span>
+      {{ momentForDisplay(day) }}
+      <span class="glyphicon glyphicon-calendar small"></span>
+      <span class="glyphicon glyphicon-circle-arrow-right small"></span>
+    </h2>
     <div class="calendar-container">
       <table>
         <tr>
           <td>
             <div class="fix-left">
-              <h2>&nbsp;</h2>
                 <table class="calendar-table table-bordered">
                   <tr >
                     <th>Medication</th>
@@ -24,7 +29,6 @@
           </td>
           <td>
             <div class="scollable-right">
-              <h2>{{ momentForDisplay(day) }}</h2>
                 <table class="calendar-table table-bordered">
                   <tr >
                     <th ng-repeat="date in dates">
@@ -32,10 +36,10 @@
                     </th>
                   </tr>
                   <tr ng-repeat="med in patient.medications" class="cal-cell">
-                    <td ng-repeat="date in dates" class="time-slot cal-cell" ng-class="{past: date.hour < 9}"
+                    <td ng-repeat="date in dates" class="time-slot cal-cell" ng-class="{'past': date.hour < 9, 'overdue': date.hour < 9 && !med.given && isMedSchedule(date, med.schedules), 'future': date.hour >= 9 && isMedSchedule(date, med.schedules)}"
                         ng-click="editMedTime(med.id, date.hour)">
                       <div ng-if="isMedSchedule(date, med.schedules)" class="is-med-schedule">
-                        <div class="glyphicon glyphicon-remove"></div>
+                        <div class="glyphicon glyphicon-list-alt medication-schedule"></div>
                       </div>
                       &nbsp;
                     </td>

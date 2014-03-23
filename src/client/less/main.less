@@ -1,13 +1,25 @@
 .time-slot {
   background-color: white;
   &:hover {
-    background-color: #ffff00;
+    background-color: deepskyblue;
   }
 }
 .time-slot.past {
   background-color: darkgray;
   &:hover {
-    background-color: #ffff00;
+    background-color: deepskyblue;
+  }
+}
+.time-slot.future {
+  background-color: #ffff00;
+  &:hover {
+    background-color: deepskyblue;
+  }
+}
+.time-slot.overdue {
+  background-color: #ff0000;
+  &:hover {
+    background-color: deepskyblue;
   }
 }
 .cal-cell {
@@ -40,4 +52,7 @@
 .is-med-schedule {
    margin: auto;
    width: 16px;
+}
+.medication-schedule {
+  margin-top: 15px;
 }
