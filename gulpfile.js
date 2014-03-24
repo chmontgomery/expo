@@ -113,12 +113,31 @@ gulp.task('watch', function () {
     });
 });
 
+var karmaPaths = [
+  paths.dist,
+  paths.angular_mocks,
+  paths.test_helpers,
+  paths.scripts,
+  paths.tests
+];
+
 gulp.task('test', function () {
-  // Be sure to return the stream
-  return gulp.src([paths.dist, paths.angular_mocks, paths.test_helpers, paths.scripts, paths.tests])
+  return gulp.src(karmaPaths)
     .pipe(karma({
       configFile: 'karma.conf.js',
       action: 'run'
+    }))
+    .on('error', function (err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
+});
+
+gulp.task('test-watch', function () {
+  return gulp.src(karmaPaths)
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
     }))
     .on('error', function (err) {
       // Make sure failed tests cause gulp to exit non-zero

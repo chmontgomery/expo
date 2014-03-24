@@ -21,7 +21,8 @@
                       "day": 18,
                       "time": 7,
                       "medId": "1",
-                      "notes": "give orally"
+                      "notes": "give orally",
+                      "given": false
                     }
                   ]
                 },
@@ -36,7 +37,8 @@
                       "day": 18,
                       "time": 7,
                       "medId": "2",
-                      "notes": null
+                      "notes": null,
+                      "given": true
                     }
                   ]
                 },

@@ -30,10 +30,10 @@
       $scope.selectedPatient = null;
       $scope.patient = null;
 
-      $scope.$watch('selectedPatient',function(newValue, oldValue){
+      $scope.$watch('selectedPatient', function (newValue, oldValue) {
         if (newValue) {
           patientService.getFullPatient(newValue.id)
-            .then(function(patient) {
+            .then(function (patient) {
               console.log(patient);
               $scope.patient = patient;
             });
@@ -44,10 +44,32 @@
         console.log(medId, hour);
       };
 
-      $scope.isMedSchedule = function(date, schedules) {
-        return !!_.find(schedules, function(s) {
+      $scope.getCurrentHour = function () {
+        // TODO fix
+        return 9;
+      };
+
+      $scope.findSchedule = function(date, schedules) {
+        return _.find(schedules, function (s) {
           return s.time == date.hour;
         });
+      };
+
+      $scope.isMedSchedule = function (date, schedules) {
+        return !!$scope.findSchedule(date, schedules);
+      };
+
+      $scope.isPast = function (date) {
+        return date.hour < $scope.getCurrentHour();
+      };
+      $scope.isOverdueSchedule = function (date, med) {
+        if ($scope.isPast(date)) {
+          var schedule = $scope.findSchedule(date, med.schedules);
+          if (schedule) {
+            return schedule.given === false;
+          }
+        }
+        return false;
       };
     }]);
 

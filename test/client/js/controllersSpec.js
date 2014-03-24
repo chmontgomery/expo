@@ -36,5 +36,31 @@ describe('controllers', function () {
       });
     });
 
+    describe('isPast', function () {
+      it('should return true', function () {
+        expect($scope.isPast({
+          hour: 7
+        })).toBe(true);
+      });
+      it('should return false', function () {
+        expect($scope.isPast({
+          hour: 10
+        })).toBe(false);
+      });
+    });
+
+    describe('isOverdueSchedule', function () {
+      it('should return true', function () {
+        expect($scope.isOverdueSchedule({
+          hour: 7
+        },fullPatient.medications[0])).toBe(true);
+      });
+      it('should return false', function () {
+        expect($scope.isOverdueSchedule({
+          hour: 9
+        },fullPatient.medications[0])).toBe(false);
+      });
+    });
+
   });
 });
