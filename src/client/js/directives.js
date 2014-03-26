@@ -1,9 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
   var module = angular.module('HomeCare.directives', []);
 
-  module.directive('navbar', function() {
+  module.directive('navbar', function () {
     return {
       restrict: "E",
       replace: true,
@@ -12,19 +12,28 @@
     };
   });
 
-  module.directive('home', function() {
+  module.directive('leftNav', function () {
     return {
       restrict: "E",
       replace: true,
-      controller: 'HomeCtrl',
-      templateUrl: 'partials/home.html'
+      controller: 'LeftNavCtrl',
+      templateUrl: 'partials/leftNav.html'
     };
   });
 
-  module.directive('currentTime', ['$interval', function($interval) {
+  module.directive('mar', function () {
+    return {
+      restrict: "E",
+      replace: true,
+      controller: 'MarCtrl',
+      templateUrl: 'partials/mar.html'
+    };
+  });
+
+  module.directive('currentTime', ['$interval', function ($interval) {
     return {
       restrict: 'A',
-      link: function(scope, element, attrs) {
+      link: function (scope, element, attrs) {
 
         function updateTime() {
           element.text(moment().format('MMMM Do YYYY, h:mm:ss a'));

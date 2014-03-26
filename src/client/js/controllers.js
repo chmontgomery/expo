@@ -3,7 +3,7 @@
 
   var module = angular.module('HomeCare.controllers', []);
 
-  module.controller('HomeCtrl', ['$scope', '$q',
+  module.controller('MarCtrl', ['$scope', '$q',
     'patientService', 'scheduleService',
     function ($scope, $q, patientService, scheduleService) {
 
@@ -75,6 +75,20 @@
 
   module.controller('NavbarCtrl', ['$scope',
     function ($scope) {
+    }]);
+
+  module.controller('LeftNavCtrl', ['$scope', '$location',
+    function ($scope, $location) {
+      $scope.links = [
+        {
+          text:'Demographics',
+          url:'/demographics'
+        },
+        {
+          text:'MAR',
+          url:'/mar'
+        }
+      ];
     }]);
 
 })();

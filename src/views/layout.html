@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>Expo</title>
+  <link href="/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+  <link href="/angular-ui/build/angular-ui.css" rel="stylesheet" type="text/css">
+  <link href="/css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="HomeCare">
+<navbar></navbar>
+<left-nav></left-nav>
+<div class="clear:both;"></div>
+<div class="right-pane">
+  {% block content %}{% endblock %}
+</div>
+<script src="/jquery/dist/jquery.js"></script>
+<script src="/angular/angular.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lodash/dist/lodash.js"></script>
+<script src="/moment/moment.js"></script>
+<script src="/js/all.js"></script>
+</body>
+</html>
