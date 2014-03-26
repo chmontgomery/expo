@@ -3,6 +3,10 @@
 
   var module = angular.module('HomeCare.controllers', []);
 
+  module.controller('HomeCtrl', ['$scope', function($scope) {
+
+  }]);
+
   module.controller('MarCtrl', ['$scope', '$q',
     'patientService', 'scheduleService',
     function ($scope, $q, patientService, scheduleService) {
@@ -73,8 +77,13 @@
       };
     }]);
 
+  module.controller('DemographicsCtrl', ['$scope', function($scope) {
+
+  }]);
+
   module.controller('NavbarCtrl', ['$scope',
     function ($scope) {
+
     }]);
 
   module.controller('LeftNavCtrl', ['$scope', '$location',

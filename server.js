@@ -8,6 +8,7 @@ var koa = require('koa'),
   loginController = require('./src/controllers/login'),
   homeController = require('./src/controllers/home'),
   marController = require('./src/controllers/mar'),
+  demographicsController = require('./src/controllers/demographics'),
   patientController = require('./src/controllers/patient'),
   scheduleController = require('./src/controllers/schedule'),
   medicationController = require('./src/controllers/medication');
@@ -18,8 +19,9 @@ app.use(common.responseTime());
 app.use(serve(path.join(__dirname, '/dist')));
 
 app.use(route.get('/', homeController));
-app.use(route.get('/mar', marController));
 app.use(route.get('/login', loginController));
+app.use(route.get('/demographics', demographicsController));
+app.use(route.get('/mar', marController));
 app.use(route.get('/patients', patientController.list));
 app.use(route.get('/patients/:id', patientController.show));
 app.use(route.get('/schedules', scheduleController.list));

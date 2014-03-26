@@ -21,12 +21,30 @@
     };
   });
 
+  module.directive('home', function () {
+    return {
+      restrict: "E",
+      replace: true,
+      controller: 'HomeCtrl',
+      templateUrl: 'partials/home.html'
+    };
+  });
+
   module.directive('mar', function () {
     return {
       restrict: "E",
       replace: true,
       controller: 'MarCtrl',
       templateUrl: 'partials/mar.html'
+    };
+  });
+
+  module.directive('demographics', function () {
+    return {
+      restrict: "E",
+      replace: true,
+      controller: 'DemographicsCtrl',
+      templateUrl: 'partials/demographics.html'
     };
   });
 
