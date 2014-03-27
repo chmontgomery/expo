@@ -8,7 +8,8 @@
   },
   "main": "./server.js",
   "scripts": {
-    "start": "node --harmony server.js"
+    "start": "node --harmony server.js",
+    "prepublish": "./node_modules/bower/bin/bower install; ./node_modules/gulp/bin/gulp build-dev"
   },
   "dependencies": {
     "koa": "~0.5.1",
