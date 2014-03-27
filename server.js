@@ -11,7 +11,8 @@ var koa = require('koa'),
   demographicsController = require('./src/controllers/demographics'),
   patientController = require('./src/controllers/patient'),
   scheduleController = require('./src/controllers/schedule'),
-  medicationController = require('./src/controllers/medication');
+  medicationController = require('./src/controllers/medication'),
+  port;
 
 app.use(common.logger());
 app.use(common.responseTime());
@@ -29,5 +30,7 @@ app.use(route.get('/schedules/:patientId', scheduleController.show));
 app.use(route.get('/medications', medicationController.list));
 app.use(route.get('/medications/:id', medicationController.show));
 
-http.createServer(app.callback()).listen(1337);
-console.log('listening on port 1337');
+port = Number(process.env.PORT || 5000);
+http.createServer(app.callback()).listen(port, function() {
+  console.log('listening on ' + port);
+});
