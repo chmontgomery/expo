@@ -2,7 +2,8 @@
   "patients": [
     {
       "id": "1",
-      "fullName": "Chris Montgomery",
+      "firstName": "Chris",
+      "lastName": "Montgomery",
       "medications": [
         {
           "id": "1"
@@ -17,7 +18,8 @@
     },
     {
       "id": "2",
-      "fullName": "Jesse Gavin",
+      "firstName": "Gavin",
+      "lastName": "Gavin",
       "medications": [
         {
           "id": "4"
@@ -26,22 +28,13 @@
     },
     {
       "id": "3",
-      "fullName": "John Doe",
+      "firstName": "John",
+      "lastName": "Doe",
       "medications": [
         {
           "id": "2"
         }
       ]
-    },
-    {
-      "id": "4",
-      "fullName": "Dup",
-      "medications": []
-    },
-    {
-      "id": "4",
-      "fullName": "Dup",
-      "medications": []
     }
   ]
 }

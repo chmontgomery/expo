@@ -5,12 +5,16 @@
    * @param $q
    * @param $http
    * @param url
+   * @param dataModifier
    * @returns {promise}
    */
-  function getRequest($q, $http, url) {
+  function getRequest($q, $http, url, dataModifier) {
     var deferred = $q.defer();
     $http({method: 'GET', url: url}).
       success(function (data, status, headers, config) {
+        if (dataModifier) {
+          dataModifier(data);
+        }
         deferred.resolve(data);
       }).
       error(function (data, status, headers, config) {
@@ -23,12 +27,23 @@
     .factory('patientService', ['$q', '$http',
       'scheduleService', 'medicationService',
       function ($q, $http, scheduleService, medicationService) {
+
+        function attachFullName(patient) {
+          patient.fullName = patient.firstName + " " + patient.lastName;
+        }
+
         return {
           getPatients: function () {
-            return getRequest($q, $http, '/patients');
+            return getRequest($q, $http, '/patients', function (data) {
+              _.each(data.patients, attachFullName);
+              return data;
+            });
           },
           getPatient: function (id) {
-            return getRequest($q, $http, '/patients/' + id);
+            return getRequest($q, $http, '/patients/' + id, function (patient) {
+              attachFullName(patient);
+              return patient;
+            });
           },
           createFullPatient: function (patient, schedules, allMedications) {
 
@@ -38,7 +53,7 @@
               });
               patient.medications[i] = _.assign({}, patientMed, medication);
 
-              patient.medications[i].schedules = _.filter(schedules, function(s) {
+              patient.medications[i].schedules = _.filter(schedules, function (s) {
                 return s.patientId === patient.id && s.medId === patientMed.id;
               });
             });
@@ -48,16 +63,17 @@
           getFullPatient: function (id) {
             var self = this;
             return $q.all([
-                self.getPatient(id),
-                scheduleService.getSchedule(id),
-                medicationService.getMedications()
-              ]).then(function (res) {
-                var patient = res[0],
-                  schedules = res[1].schedules,
-                  medications = res[2].medications;
+              self.getPatient(id),
+              scheduleService.getSchedule(id),
+              medicationService.getMedications()
+            ]).then(function (res) {
+              console.log(res[0]);
+              var patient = res[0],
+                schedules = res[1].schedules,
+                medications = res[2].medications;
 
-                return self.createFullPatient(patient, schedules, medications);
-              });
+              return self.createFullPatient(patient, schedules, medications);
+            });
           }
         };
       }])

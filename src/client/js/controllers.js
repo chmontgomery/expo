@@ -1,10 +1,19 @@
 (function () {
   'use strict';
 
-  var module = angular.module('HomeCare.controllers', []);
+  var module = angular.module('HomeCare.controllers', [
+    'HomeCare.services'
+  ]);
 
-  module.controller('HomeCtrl', ['$scope', function($scope) {
-
+  module.controller('HomeCtrl', ['$scope', 'patientService',
+    function($scope, patientService) {
+    $scope.searchText = '';
+    $scope.patients = [];
+    $scope.getPatients = function() {
+      patientService.getPatients().then(function (data) {
+        $scope.patients = data.patients;
+      });
+    };
   }]);
 
   module.controller('MarCtrl', ['$scope', '$q',

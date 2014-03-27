@@ -3,8 +3,7 @@
 
   angular.module('HomeCare', [
     'HomeCare.directives',
-    'HomeCare.controllers',
-    'HomeCare.services'
+    'HomeCare.controllers'
   ]);
 
 })();
