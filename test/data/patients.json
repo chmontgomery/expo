@@ -4,6 +4,7 @@
       "id": "1",
       "firstName": "Chris",
       "lastName": "Montgomery",
+      "homePhone": "763-228-1234",
       "medications": [
         {
           "id": "1"
@@ -20,6 +21,7 @@
       "id": "2",
       "firstName": "Jesse",
       "lastName": "Gavin",
+      "homePhone": "509-812-3219",
       "medications": [
         {
           "id": "4"
@@ -30,6 +32,7 @@
       "id": "3",
       "firstName": "John",
       "lastName": "Doe",
+      "homePhone": "123-812-3219",
       "medications": [
         {
           "id": "2"
@@ -40,6 +43,7 @@
       "id": "4",
       "firstName": "Chris",
       "lastName": "Luedemann",
+      "homePhone": "695-812-3219",
       "medications": []
     }
   ]

@@ -16,7 +16,7 @@
         $scope.searchCallInProgress = true;
 
         // TODO timeout for testing only
-        $timeout(function() {
+        $timeout(function () {
           patientService.getPatientsByName($scope.searchText).then(function (data) {
             $scope.searchCallInProgress = false;
             $scope.patients = data.patients;
@@ -96,9 +96,16 @@
       };
     }]);
 
-  module.controller('DemographicsCtrl', ['$scope', function ($scope) {
-
-  }]);
+  module.controller('DemographicsCtrl', ['$scope', 'patientService',
+    function ($scope, patientService) {
+      // TODO get id from url
+      $scope.patientId = 1;
+      $scope.patient = {};
+      patientService.getFullPatient($scope.patientId).then(function (patient) {
+        console.log(patient);
+        $scope.patient = patient;
+      });
+    }]);
 
   module.controller('NavbarCtrl', ['$scope',
     function ($scope) {
