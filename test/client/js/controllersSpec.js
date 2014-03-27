@@ -6,7 +6,7 @@ describe('controllers', function () {
   beforeEach(module('HomeCare.services'));
   beforeEach(module('TestHelper.services'));
 
-  describe('HomeCtrl', function () {
+  describe('MarCtrl', function () {
 
     var $scope,
       $controller,
@@ -18,7 +18,7 @@ describe('controllers', function () {
     beforeEach(inject(function ($injector) {
       $scope = $injector.get('$rootScope').$new();
       $controller = $injector.get('$controller');
-      ctrl = $controller('HomeCtrl', { $scope: $scope});
+      ctrl = $controller('MarCtrl', { $scope: $scope});
       testHelperService = $injector.get('testHelperService');
       fullPatient = testHelperService.getFullPatient();
     }));
