@@ -1,17 +1,26 @@
-<div class="container">
-  Patient Search:
-  <input type="text" ng-model="searchText"/>
-  <div class="btn btn-primary" ng-click="getPatients()">
-    <span class="glyphicon glyphicon-search"></span>
+<div>
+  <div class="patient-search">
+    Patient Search:
+    <input type="text" ng-model="searchText"/>
+
+    <div class="btn btn-primary" ng-click="getPatients()">
+      <span class="glyphicon glyphicon-search"></span>
+    </div>
   </div>
 
-  <table class="table table-striped">
+  <table class="table table-striped" ng-if="searchCalled">
     <tr>
       <th>First</th>
       <th>Last</th>
       <th>View</th>
     </tr>
-    <tr ng-repeat="p in patients">
+    <tr ng-if="searchCallInProgress">
+      <td colspan="3">Loading...</td>
+    </tr>
+    <tr ng-if="searchCalled && !searchCallInProgress && patients.length === 0">
+      <td colspan="3">No patients found matching your search</td>
+    </tr>
+    <tr ng-if="!searchCallInProgress" ng-repeat="p in patients">
       <td>{{p.firstName}}</td>
       <td>{{p.lastName}}</td>
       <td>
@@ -24,4 +33,5 @@
       </td>
     </tr>
   </table>
+
 </div>

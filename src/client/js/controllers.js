@@ -5,16 +5,26 @@
     'HomeCare.services'
   ]);
 
-  module.controller('HomeCtrl', ['$scope', 'patientService',
-    function($scope, patientService) {
-    $scope.searchText = '';
-    $scope.patients = [];
-    $scope.getPatients = function() {
-      patientService.getPatients().then(function (data) {
-        $scope.patients = data.patients;
-      });
-    };
-  }]);
+  module.controller('HomeCtrl', ['$scope', 'patientService', '$timeout',
+    function ($scope, patientService, $timeout) {
+      $scope.searchText = '';
+      $scope.patients = [];
+      $scope.searchCalled = false;
+      $scope.searchCallInProgress = false;
+      $scope.getPatients = function () {
+        $scope.searchCalled = true;
+        $scope.searchCallInProgress = true;
+
+        // TODO timeout for testing only
+        $timeout(function() {
+          patientService.getPatientsByName($scope.searchText).then(function (data) {
+            $scope.searchCallInProgress = false;
+            $scope.patients = data.patients;
+          });
+        }, 500);
+
+      };
+    }]);
 
   module.controller('MarCtrl', ['$scope', '$q',
     'patientService', 'scheduleService',
@@ -62,7 +72,7 @@
         return 9;
       };
 
-      $scope.findSchedule = function(date, schedules) {
+      $scope.findSchedule = function (date, schedules) {
         return _.find(schedules, function (s) {
           return s.time == date.hour;
         });
@@ -86,7 +96,7 @@
       };
     }]);
 
-  module.controller('DemographicsCtrl', ['$scope', function($scope) {
+  module.controller('DemographicsCtrl', ['$scope', function ($scope) {
 
   }]);
 
@@ -99,12 +109,12 @@
     function ($scope, $location) {
       $scope.links = [
         {
-          text:'Demographics',
-          url:'/demographics'
+          text: 'Demographics',
+          url: '/demographics'
         },
         {
-          text:'MAR',
-          url:'/mar'
+          text: 'MAR',
+          url: '/mar'
         }
       ];
     }]);

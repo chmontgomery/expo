@@ -33,6 +33,16 @@
         }
 
         return {
+          getPatientsByName: function (searchString) {
+            return getRequest($q, $http, '/patients', function (data) {
+              _.each(data.patients, attachFullName);
+              // TODO filter this server side
+              data.patients = _.filter(data.patients, function(p) {
+                return p.fullName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1;
+              });
+              return data;
+            });
+          },
           getPatients: function () {
             return getRequest($q, $http, '/patients', function (data) {
               _.each(data.patients, attachFullName);
