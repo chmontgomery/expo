@@ -88,4 +88,43 @@ describe('services', function () {
       expect(result).toEqual(testHelperService.getFullPatient())
     });
   });
+
+  describe('urlService', function () {
+
+    var urlService;
+
+    // Initialize the controller and a mock scope
+    beforeEach(inject(function ($injector) {
+      urlService = $injector.get('urlService');
+    }));
+
+    it('should return null', function() {
+      urlService.getSearchString = function() {
+        return '';
+      };
+      expect(urlService.getParam('id')).toEqual(null);
+    });
+
+    it('should get param', function() {
+      urlService.getSearchString = function() {
+        return '?id=1';
+      };
+      expect(urlService.getParam('id')).toEqual('1');
+    });
+
+    it('should get param at end', function() {
+      urlService.getSearchString = function() {
+        return '?test=3&id=1';
+      };
+      expect(urlService.getParam('id')).toEqual('1');
+    });
+
+    it('should get param in middle', function() {
+      urlService.getSearchString = function() {
+        return '?test=3&id=1&another=blah';
+      };
+      expect(urlService.getParam('id')).toEqual('1');
+    });
+
+  });
 });

@@ -1,11 +1,14 @@
 <div>
 
-  View Patient: <select ng-model="selectedPatient" ng-options="p.fullName for p in patients">
-    <option value="">-- choose --</option>
-  </select>
+  <div ng-if="!patient">
+    Find a patient to view <a href="/">here</a>.
+  </div>
 
   <div ng-if="patient">
-    <h1>{{ selectedPatient.fullName }}</h1>
+    <h1>
+      <a href="/demographics?id={{patient.id}}"><span class="glyphicon glyphicon-user"></span></a>
+      {{ patient.fullName }}
+    </h1>
     <h2>
       <span class="glyphicon glyphicon-circle-arrow-left small"></span>
       {{ momentForDisplay(day) }}

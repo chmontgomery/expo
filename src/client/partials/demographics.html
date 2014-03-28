@@ -1,6 +1,10 @@
 <div class="container">
 
-  <table class="table table-striped">
+  <div ng-if="!patient">
+    Find a patient to view <a href="/">here</a>.
+  </div>
+
+  <table class="table table-striped" ng-if="patient">
     <tr>
       <td><span class="glyphicon glyphicon-user"></span></td>
       <td>First Name</td>
@@ -16,7 +20,10 @@
       <td>Home Phone</td>
       <td>{{patient.homePhone}}</td>
     </tr>
-
+    <tr>
+      <td><span class="glyphicon glyphicon-calendar"></span></td>
+      <td colspan="2"><a href="mar?id={{patient.id}}">View Schedules</a></td>
+    </tr>
   </table>
 
 </div>

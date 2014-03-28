@@ -106,5 +106,31 @@
           return getRequest($q, $http, '/medications/' + id);
         }
       };
-    }]);
+    }])
+    .factory('urlService', function() {
+      return {
+        getSearchString: function() {
+          return location.search;
+        },
+        getParam: function(key) {
+          var searchParams = this.getSearchString(),
+            paramsString,
+            urlParams,
+            theParam;
+          if (searchParams.indexOf(key) !== -1) {
+            if (searchParams.indexOf('?') !== -1) {
+              paramsString = searchParams.split('?')[1];
+              urlParams = paramsString.split('&');
+              theParam = _.filter(urlParams, function(keyVal) {
+                return keyVal.indexOf(key + '=') !== -1;
+              });
+              if (theParam.length === 1) {
+                return theParam[0].split('=')[1];
+              }
+            }
+          }
+          return null;
+        }
+      };
+    });
 })();
