@@ -19,10 +19,7 @@
     "co-views": "~0.2.0",
     "swig": "~1.3.2",
     "koa-static": "~1.4.3",
-    "lodash": "~2.4.1"
-  },
-  "license": "",
-  "devDependencies": {
+    "lodash": "~2.4.1",
     "gulp": "^3.6.0",
     "gulp-watch": "~0.5.2",
     "gulp-util": "~2.2.14",
@@ -40,5 +37,8 @@
     "karma-phantomjs-launcher": "^0.1.2",
     "run-sequence": "~0.3.6",
     "gulp-minify-css": "~0.3.0"
+  },
+  "license": "",
+  "devDependencies": {
   }
 }

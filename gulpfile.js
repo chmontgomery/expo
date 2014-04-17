@@ -8,7 +8,8 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   karma = require('gulp-karma'),
   runSequence = require('run-sequence'),
-  livereload = require('gulp-livereload');
+  livereload = require('gulp-livereload'),
+  help = require('gulp-help');
 
 var paths = {
   scripts: './src/client/js/**/*.js',
@@ -47,6 +48,8 @@ var bowerFilesMin = [
   './bower_components/lodash/dist/lodash.min.js',
   './bower_components/moment/moment/min/moment.min.js'
 ];
+
+help(gulp);
 
 gulp.task('clean', function () {
   return gulp.src(['./dist/*'], {read: false})
