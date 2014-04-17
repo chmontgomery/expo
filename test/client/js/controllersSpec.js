@@ -12,13 +12,19 @@ describe('controllers', function () {
       $controller,
       ctrl,
       testHelperService,
-      fullPatient;
+      fullPatient,
+      urlService;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($injector) {
       $scope = $injector.get('$rootScope').$new();
       $controller = $injector.get('$controller');
-      ctrl = $controller('MarCtrl', { $scope: $scope});
+      urlService = {
+        getParam: function () {
+          return 'not_null';
+        }
+      };
+      ctrl = $controller('MarCtrl', { $scope: $scope, urlService: urlService });
       testHelperService = $injector.get('testHelperService');
       fullPatient = testHelperService.getFullPatient();
     }));
@@ -27,12 +33,12 @@ describe('controllers', function () {
       it('should return true', function () {
         expect($scope.isMedSchedule({
           hour: 7
-        },fullPatient.medications[0].schedules)).toBe(true);
+        }, fullPatient.medications[0].schedules)).toBe(true);
       });
       it('should return false', function () {
         expect($scope.isMedSchedule({
           hour: 8
-        },fullPatient.medications[0].schedules)).toBe(false);
+        }, fullPatient.medications[0].schedules)).toBe(false);
       });
     });
 
@@ -53,12 +59,12 @@ describe('controllers', function () {
       it('should return true', function () {
         expect($scope.isOverdueSchedule({
           hour: 7
-        },fullPatient.medications[0])).toBe(true);
+        }, fullPatient.medications[0])).toBe(true);
       });
       it('should return false', function () {
         expect($scope.isOverdueSchedule({
           hour: 9
-        },fullPatient.medications[0])).toBe(false);
+        }, fullPatient.medications[0])).toBe(false);
       });
     });
 
