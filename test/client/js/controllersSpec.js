@@ -12,19 +12,14 @@ describe('controllers', function () {
       $controller,
       ctrl,
       testHelperService,
-      fullPatient,
-      urlService;
+      fullPatient;
 
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($injector) {
       $scope = $injector.get('$rootScope').$new();
+      $scope.patientString = '{}';
       $controller = $injector.get('$controller');
-      urlService = {
-        getParam: function () {
-          return 'not_null';
-        }
-      };
-      ctrl = $controller('MarCtrl', { $scope: $scope, urlService: urlService });
+      ctrl = $controller('MarCtrl', { $scope: $scope});
       testHelperService = $injector.get('testHelperService');
       fullPatient = testHelperService.getFullPatient();
     }));

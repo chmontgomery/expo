@@ -21,8 +21,11 @@ app.use(serve(path.join(__dirname, '/dist')));
 
 app.use(route.get('/', homeController));
 app.use(route.get('/login', loginController));
-app.use(route.get('/demographics', demographicsController));
-app.use(route.get('/mar', marController));
+app.use(route.get('/demographics', demographicsController.list));
+app.use(route.get('/demographics/:id', demographicsController.show));
+app.use(route.get('/mar', marController.list));
+app.use(route.get('/mar/:id', marController.show));
+app.use(route.get('/mar/:id/json', marController.showJSON));
 app.use(route.get('/patients', patientController.list));
 app.use(route.get('/patients/:id', patientController.show));
 app.use(route.get('/schedules', scheduleController.list));

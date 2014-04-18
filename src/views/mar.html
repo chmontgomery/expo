@@ -1,5 +1,17 @@
 {% extends 'layout.html' %}
 
+{% block patientId %}
+{{ patient.id }}
+{% endblock %}
+
+{% block patientName %}
+{{ patient.firstName }} {{ patient.lastName }}
+{% endblock %}
+
+{% block patientDOB %}
+{{ patient.dob }}
+{% endblock %}
+
 {% block content %}
-<mar></mar>
+<mar patient-string='{{ JSON.stringify(patient) }}'></mar>
 {% endblock %}

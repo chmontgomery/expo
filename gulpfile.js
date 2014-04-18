@@ -163,4 +163,4 @@ gulp.task('build', function(callback) {
     callback);
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['help']);

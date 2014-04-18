@@ -6,8 +6,8 @@
 
   <div ng-if="patient">
     <h1>
-      <a href="/demographics?id={{patient.id}}"><span class="glyphicon glyphicon-user"></span></a>
-      {{ patient.fullName }}
+      <a href="/demographics/{{patient.id}}"><span class="glyphicon glyphicon-user"></span></a>
+      {{ patient.firstName }} {{ patient.lastName }}
     </h1>
     <h2>
       <span class="glyphicon glyphicon-circle-arrow-left small"></span>

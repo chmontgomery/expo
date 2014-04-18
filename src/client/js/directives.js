@@ -8,7 +8,12 @@
       restrict: "E",
       replace: true,
       controller: 'NavbarCtrl',
-      templateUrl: 'partials/navbar.html'
+      templateUrl: '/partials/navbar.html',
+      scope: {
+        name: '@',
+        dob: '@',
+        id: '@'
+      }
     };
   });
 
@@ -17,7 +22,10 @@
       restrict: "E",
       replace: true,
       controller: 'LeftNavCtrl',
-      templateUrl: 'partials/leftNav.html'
+      templateUrl: '/partials/leftNav.html',
+      scope: {
+        id: '@'
+      }
     };
   });
 
@@ -26,7 +34,7 @@
       restrict: "E",
       replace: true,
       controller: 'HomeCtrl',
-      templateUrl: 'partials/home.html'
+      templateUrl: '/partials/home.html'
     };
   });
 
@@ -35,7 +43,10 @@
       restrict: "E",
       replace: true,
       controller: 'MarCtrl',
-      templateUrl: 'partials/mar.html'
+      templateUrl: '/partials/mar.html',
+      scope: {
+        patientString: '@'
+      }
     };
   });
 
@@ -44,7 +55,10 @@
       restrict: "E",
       replace: true,
       controller: 'DemographicsCtrl',
-      templateUrl: 'partials/demographics.html'
+      templateUrl: '/partials/demographics.html',
+      scope: {
+        patientString: '@'
+      }
     };
   });
 

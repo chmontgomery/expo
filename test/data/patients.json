@@ -5,6 +5,7 @@
       "firstName": "Chris",
       "lastName": "Montgomery",
       "homePhone": "763-228-1234",
+      "dob": "6/26/1986",
       "medications": [
         {
           "id": "1"
@@ -22,6 +23,7 @@
       "firstName": "Jesse",
       "lastName": "Gavin",
       "homePhone": "509-812-3219",
+      "dob": "12/25/1982",
       "medications": [
         {
           "id": "4"
@@ -33,6 +35,7 @@
       "firstName": "John",
       "lastName": "Doe",
       "homePhone": "123-812-3219",
+      "dob": "1/3/1959",
       "medications": [
         {
           "id": "2"
@@ -44,6 +47,7 @@
       "firstName": "Chris",
       "lastName": "Luedemann",
       "homePhone": "695-812-3219",
+      "dob": "6/20/2001",
       "medications": []
     }
   ]

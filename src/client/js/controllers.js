@@ -26,98 +26,84 @@
       };
     }]);
 
-  module.controller('MarCtrl', ['$scope', '$q',
-    'patientService', 'urlService',
-    function ($scope, $q, patientService, urlService) {
+  module.controller('MarCtrl', ['$scope',
+    function ($scope) {
 
-      $scope.patient = null;
-      $scope.patientId = urlService.getParam('id');
+      $scope.patient = JSON.parse($scope.patientString);
 
-      if ($scope.patientId) {
+      $scope.dates = [];
 
-        patientService.getFullPatient($scope.patientId)
-          .then(function (patient) {
-            $scope.patient = patient;
-          });
-
-        $scope.dates = [];
-
-        for (var i = 0; i < 24; i++) {
-          $scope.dates.push({
-            hour: i
-          });
-        }
-
-        $scope.day = moment(); // default to today
-
-        $scope.momentForDisplay = function (m) {
-          return m.format('MM/DD/YYYY');
-        };
-
-
-        $scope.editMedTime = function (medId, hour) {
-          console.log(medId, hour);
-        };
-
-        $scope.getCurrentHour = function () {
-          // TODO fix
-          return 9;
-        };
-
-        $scope.findSchedule = function (date, schedules) {
-          return _.find(schedules, function (s) {
-            return s.time == date.hour;
-          });
-        };
-
-        $scope.isMedSchedule = function (date, schedules) {
-          return !!$scope.findSchedule(date, schedules);
-        };
-
-        $scope.isPast = function (date) {
-          return date.hour < $scope.getCurrentHour();
-        };
-        $scope.isOverdueSchedule = function (date, med) {
-          if ($scope.isPast(date)) {
-            var schedule = $scope.findSchedule(date, med.schedules);
-            if (schedule) {
-              return schedule.given === false;
-            }
-          }
-          return false;
-        };
+      for (var i = 0; i < 24; i++) {
+        $scope.dates.push({
+          hour: i
+        });
       }
+
+      $scope.day = moment(); // default to today
+
+      $scope.momentForDisplay = function (m) {
+        return m.format('MM/DD/YYYY');
+      };
+
+
+      $scope.editMedTime = function (medId, hour) {
+        console.log(medId, hour);
+      };
+
+      $scope.getCurrentHour = function () {
+        // TODO fix
+        return 9;
+      };
+
+      $scope.findSchedule = function (date, schedules) {
+        return _.find(schedules, function (s) {
+          return s.time == date.hour;
+        });
+      };
+
+      $scope.isMedSchedule = function (date, schedules) {
+        return !!$scope.findSchedule(date, schedules);
+      };
+
+      $scope.isPast = function (date) {
+        return date.hour < $scope.getCurrentHour();
+      };
+      $scope.isOverdueSchedule = function (date, med) {
+        if ($scope.isPast(date)) {
+          var schedule = $scope.findSchedule(date, med.schedules);
+          if (schedule) {
+            return schedule.given === false;
+          }
+        }
+        return false;
+      };
+
 
     }]);
 
-  module.controller('DemographicsCtrl', ['$scope', 'patientService', 'urlService',
-    function ($scope, patientService, urlService) {
-      $scope.patient = null;
-      $scope.patientId = urlService.getParam('id');
-      if ($scope.patientId) {
-        patientService.getFullPatient($scope.patientId).then(function (patient) {
-          console.log(patient);
-          $scope.patient = patient;
-        });
-      }
+  module.controller('DemographicsCtrl', ['$scope',
+    function ($scope) {
+      $scope.patient = JSON.parse($scope.patientString)
     }]);
 
   module.controller('NavbarCtrl', ['$scope',
     function ($scope) {
     }]);
 
-  module.controller('LeftNavCtrl', ['$scope', '$location',
-    function ($scope, $location) {
-      $scope.links = [
-        {
-          text: 'Demographics',
-          url: '/demographics'
-        },
-        {
-          text: 'MAR',
-          url: '/mar'
-        }
-      ];
+  module.controller('LeftNavCtrl', ['$scope',
+    function ($scope) {
+      if ($scope.id) {
+        $scope.links = [
+          {
+            text: 'Demographics',
+            url: '/demographics/' + $scope.id
+          },
+          {
+            text: 'MAR',
+            url: '/mar/' + $scope.id
+          }
+        ];
+      }
     }]);
 
 })();
