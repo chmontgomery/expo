@@ -107,7 +107,7 @@
             url: ''
           },
           {
-            text: 'Infusion',
+            text: 'Infusions',
             url: ''
           },
           {
