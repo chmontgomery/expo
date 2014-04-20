@@ -1,4 +1,4 @@
-<div>
+<div class="patient-search-wrap">
   <div class="patient-search">
     Patient Search:
     <input type="text" ng-enter="getPatients()" ng-model="searchText"/>
@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <table class="table table-striped" ng-if="searchCalled">
+  <table class="table table-striped patient-search-table" ng-if="searchCalled">
     <tr>
       <th>First</th>
       <th>Last</th>
@@ -33,5 +33,4 @@
       </td>
     </tr>
   </table>
-
 </div>

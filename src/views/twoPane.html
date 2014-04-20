@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block mainContent %}
+<navbar name="{% block patientName %}{% endblock %}"
+        dob="{% block patientDOB %}{% endblock %}"
+        id="{% block patientId %}{% endblock %}"></navbar>
+<left-nav id="{% block patientId %}{% endblock %}"></left-nav>
+<div class="clear:both;"></div>
+<div class="right-pane">
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}

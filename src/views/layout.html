@@ -7,14 +7,7 @@
   <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-app="HomeCare">
-<navbar name="{% block patientName %}{% endblock %}"
-    dob="{% block patientDOB %}{% endblock %}"
-    id="{% block patientId %}{% endblock %}"></navbar>
-<left-nav id="{% block patientId %}{% endblock %}"></left-nav>
-<div class="clear:both;"></div>
-<div class="right-pane">
-  {% block content %}{% endblock %}
-</div>
+{% block mainContent %}{% endblock %}
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/angular/angular.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
