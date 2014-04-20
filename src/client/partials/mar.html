@@ -5,6 +5,8 @@
   </div>
 
   <div ng-if="patient">
+    <span class="cal-current-time" current-time></span>
+    <span style="clear:both;"></span>
     <h1>
       <a href="/demographics/{{patient.id}}"><span class="glyphicon glyphicon-user"></span></a>
       {{ patient.firstName }} {{ patient.lastName }}

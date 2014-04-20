@@ -99,8 +99,36 @@
             url: '/demographics/' + $scope.id
           },
           {
-            text: 'MAR',
+            text: 'Medications',
             url: '/mar/' + $scope.id
+          },
+          {
+            text: 'Treatments', //TAR
+            url: ''
+          },
+          {
+            text: 'Infusion',
+            url: ''
+          },
+          {
+            text: 'Wounds',
+            url: ''
+          },
+          {
+            text: 'Physicians Orders',
+            url: ''
+          },
+          {
+            text: 'Progress Notes',
+            url: ''
+          },
+          {
+            text: 'Flowsheets',
+            url: ''
+          },
+          {
+            text: 'Equipment',
+            url: ''
           }
         ];
       }
