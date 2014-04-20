@@ -36,9 +36,9 @@
     "karma-junit-reporter": "^0.2.1",
     "karma-phantomjs-launcher": "^0.1.2",
     "run-sequence": "~0.3.6",
-    "gulp-minify-css": "~0.3.0"
+    "gulp-minify-css": "~0.3.0",
+    "gulp-help": "~0.1.2"
   },
   "license": "",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
