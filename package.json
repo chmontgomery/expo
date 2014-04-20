@@ -11,6 +11,10 @@
     "start": "node --harmony server.js",
     "prepublish": "./node_modules/bower/bin/bower install;./node_modules/gulp/bin/gulp.js build-dev"
   },
+  "author": {
+    "name": "Chris Montgomery",
+    "email": "chr.montgomery@gmail.com"
+  },
   "dependencies": {
     "koa": "~0.5.1",
     "koa-common": "~1.2.0",
