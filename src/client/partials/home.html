@@ -20,7 +20,7 @@
     <tr ng-if="searchCalled && !searchCallInProgress && patients.length === 0">
       <td colspan="3">No patients found matching your search</td>
     </tr>
-    <tr ng-if="!searchCallInProgress" ng-repeat="p in patients">
+    <tr ng-if="!searchCallInProgress" ng-repeat="p in patients" >
       <td>{{p.firstName}}</td>
       <td>{{p.lastName}}</td>
       <td>
