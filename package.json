@@ -9,7 +9,7 @@
   "main": "./server.js",
   "scripts": {
     "start": "node --harmony server.js",
-    "prepublish": "./node_modules/bower/bin/bower install;./node_modules/gulp/bin/gulp.js build-dev"
+    "prepublish": "./node_modules/bower/bin/bower install;./node_modules/gulp/bin/gulp.js build"
   },
   "author": {
     "name": "Chris Montgomery",
