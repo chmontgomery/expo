@@ -5,7 +5,8 @@
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 7,
+      "hour": 7,
+      "minute": 0,
       "medId": "1",
       "notes": "give orally",
       "given": false
@@ -15,7 +16,8 @@
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 12,
+      "hour": 11,
+      "minute": 30,
       "medId": "2",
       "notes": "take with food",
       "given": false
@@ -25,7 +27,8 @@
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 15,
+      "hour": 15,
+      "minute": 0,
       "medId": "1",
       "notes": "give orally",
       "given": false
@@ -35,7 +38,8 @@
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 8,
+      "hour": 8,
+      "minute": 0,
       "medId": "3",
       "notes": null,
       "given": true
@@ -45,7 +49,8 @@
       "year": 2014,
       "month": 3,
       "day": 22,
-      "time": 7,
+      "hour": 7,
+      "minute": 0,
       "medId": "1",
       "notes": null,
       "given": true

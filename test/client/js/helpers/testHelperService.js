@@ -19,7 +19,19 @@
                       "year": 2014,
                       "month": 3,
                       "day": 18,
-                      "time": 7,
+                      "hour": 7,
+                      "minute": 0,
+                      "medId": "1",
+                      "notes": "give orally",
+                      "given": false
+                    },
+                    {
+                      "patientId": "1",
+                      "year": 2014,
+                      "month": 3,
+                      "day": 18,
+                      "hour": 9,
+                      "minute": 30,
                       "medId": "1",
                       "notes": "give orally",
                       "given": false
@@ -35,7 +47,8 @@
                       "year": 2014,
                       "month": 3,
                       "day": 18,
-                      "time": 7,
+                      "hour": 7,
+                      "minute": 0,
                       "medId": "2",
                       "notes": null,
                       "given": true

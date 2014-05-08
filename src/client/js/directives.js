@@ -8,7 +8,7 @@
       restrict: "E",
       replace: true,
       controller: 'NavbarCtrl',
-      templateUrl: '/partials/navbar.html',
+      templateUrl: '/public/partials/navbar.html',
       scope: {
         name: '@',
         dob: '@',
@@ -22,7 +22,7 @@
       restrict: "E",
       replace: true,
       controller: 'LeftNavCtrl',
-      templateUrl: '/partials/leftNav.html',
+      templateUrl: '/public/partials/leftNav.html',
       scope: {
         id: '@'
       }
@@ -34,7 +34,7 @@
       restrict: "E",
       replace: true,
       controller: 'HomeCtrl',
-      templateUrl: '/partials/home.html'
+      templateUrl: '/public/partials/home.html'
     };
   });
 
@@ -43,7 +43,7 @@
       restrict: "E",
       replace: true,
       controller: 'MarCtrl',
-      templateUrl: '/partials/mar.html',
+      templateUrl: '/public/partials/mar.html',
       scope: {
         patientString: '@'
       }
@@ -55,7 +55,7 @@
       restrict: "E",
       replace: true,
       controller: 'DemographicsCtrl',
-      templateUrl: '/partials/demographics.html',
+      templateUrl: '/public/partials/demographics.html',
       scope: {
         patientString: '@'
       }

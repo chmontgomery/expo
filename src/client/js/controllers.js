@@ -33,9 +33,10 @@
 
       $scope.dates = [];
 
-      for (var i = 0; i < 24; i++) {
+      for (var i = 0; i < 48; i++) {
         $scope.dates.push({
-          hour: i
+          hour: Math.floor(i / 2),
+          minute: (i % 2) * 30
         });
       }
 
@@ -50,14 +51,17 @@
         console.log(medId, hour);
       };
 
-      $scope.getCurrentHour = function () {
+      $scope.getCurrentTime = function () {
         // TODO fix
-        return 9;
+        return {
+          hour: 9,
+          minute: 27
+        };
       };
 
       $scope.findSchedule = function (date, schedules) {
         return _.find(schedules, function (s) {
-          return s.time == date.hour;
+          return s.hour == date.hour && s.minute == date.minute;
         });
       };
 
@@ -66,7 +70,11 @@
       };
 
       $scope.isPast = function (date) {
-        return date.hour < $scope.getCurrentHour();
+        var current = $scope.getCurrentTime();
+        if (date.hour === current.hour) {
+          return date.minute < current.minute;
+        }
+        return date.hour < current.hour;
       };
       $scope.isOverdueSchedule = function (date, med) {
         if ($scope.isPast(date)) {

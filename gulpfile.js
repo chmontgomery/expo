@@ -4,12 +4,10 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   clean = require('gulp-clean'),
   less = require('gulp-less'),
-  minifyCSS = require('gulp-minify-css'),
-  uglify = require('gulp-uglify'),
   karma = require('gulp-karma'),
   runSequence = require('run-sequence'),
   livereload = require('gulp-livereload'),
-  help = require('gulp-help');
+  nodemon = require('gulp-nodemon');
 
 var paths = {
   scripts: './src/client/js/**/*.js',
@@ -18,10 +16,9 @@ var paths = {
   tests: './test/client/js/**/*.js',
   angular_mocks: './bower_components/angular-mocks/angular-mocks.js',
   test_helpers: './test/client/js/helpers/testHelperService.js',
-  dist: './dist/**/*.js'
-};
-
-var bowerFiles = [
+  dist: './dist/**/*.js',
+  public: './dist/public'
+}, bowerFiles = [
   './bower_components/angular/angular.js',
   './bower_components/angular-ui/build/angular-ui.js',
   './bower_components/angular-ui/build/angular-ui.css',
@@ -33,10 +30,11 @@ var bowerFiles = [
   './bower_components/bootstrap/dist/js/bootstrap.js',
   './bower_components/bootstrap/dist/fonts/*',
   './bower_components/lodash/dist/lodash.js',
-  './bower_components/moment/moment.js'
-];
-
-var bowerFilesMin = [
+  './bower_components/moment/moment.js',
+  './bower_components/angular-strap/dist/angular-strap.js',
+  './bower_components/angular-strap/dist/angular-strap.tpl.js',
+  './bower_components/angular-animate/angular-animate.js'
+], bowerFilesMin = [
   './bower_components/angular/angular.min.js',
   './bower_components/angular-ui/build/angular-ui.min.js',
   './bower_components/angular-ui/build/angular-ui.min.css',
@@ -46,10 +44,59 @@ var bowerFilesMin = [
   './bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
   './bower_components/bootstrap/dist/fonts/*',
   './bower_components/lodash/dist/lodash.min.js',
-  './bower_components/moment/moment/min/moment.min.js'
+  './bower_components/moment/moment/min/moment.min.js',
+  './bower_components/angular-strap/dist/angular-strap.min.js',
+  './bower_components/angular-strap/dist/angular-strap.tpl.min.js',
+  './bower_components/angular-animate/angular-animate.min.js'
 ];
 
-help(gulp);
+require('load-common-gulp-tasks')(gulp, {
+  paths: {
+    lint: [
+      './*.js',
+      './src/controllers/**/*.js',
+      './src/lib/**/*.js',
+      './src/services/**/*.js'
+    ],
+    felint: [
+      './src/client/**/*.js',
+      './test/client/**/*.js'
+    ],
+    cover: [
+      './src/controllers/**/*.js',
+      './src/lib/**/*.js',
+      './src/services/**/*.js',
+      './server.js'
+    ],
+    test: [
+      './test/server/**/*.js'
+    ]
+  },
+  jshintrc: {
+    server: '.jshintrc',
+    client: 'client.jshintrc'
+  }
+});
+
+// redefine since instanbul doesn't support ES6
+gulp.task('ci', 'Lint, tests and test coverage', ['test', 'lint', 'felint']);
+gulp.task('ci-watch', false, ['lint-watch', 'felint-watch', 'test']);
+
+gulp.task('develop', 'Watch and restart server on change', ['build', 'watch'], function () {
+  nodemon({
+    script: 'server.js',
+    ext: 'html js',
+    ignore: [],
+    execMap: {
+      js: "node --harmony"
+    }
+  })
+    .on('change', ['ci-watch'])
+    .on('restart', function () {
+      var d = new Date();
+      console.log(gutil.colors.bgBlue('server restarted at ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()));
+    });
+});
 
 gulp.task('clean', function () {
   return gulp.src(['./dist/*'], {read: false})
@@ -60,60 +107,38 @@ gulp.task('bower-files', function () {
   // the base option sets the relative root for the set of files,
   // preserving the folder structure
   return gulp.src(bowerFiles, { base: './bower_components/' })
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('bower-files-min', function () {
-  // the base option sets the relative root for the set of files,
-  // preserving the folder structure
-  return gulp.src(bowerFilesMin, { base: './bower_components/' })
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(paths.public));
 });
 
 gulp.task('styles', function () {
   return gulp.src(paths.less)
     .pipe(less())
-    .pipe(gulp.dest('./dist/css'));
-});
-
-gulp.task('styles-min', function () {
-  return gulp.src(paths.less)
-    .pipe(less())
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest(paths.public + '/css'));
 });
 
 gulp.task('scripts', function () {
   // Minify and copy all JavaScript (except vendor scripts)
   return gulp.src(paths.scripts)
     .pipe(concat('all.js'))
-    .pipe(gulp.dest('./dist/js'));
-});
-
-gulp.task('scripts-min', function () {
-  // Minify and copy all JavaScript (except vendor scripts)
-  return gulp.src(paths.scripts)
-    .pipe(uglify())
-    .pipe(concat('all.min.js'))
-    .pipe(gulp.dest('./dist/js'));
+    .pipe(gulp.dest(paths.public + '/js'));
 });
 
 gulp.task('partials', function () {
   // Minify and copy all JavaScript (except vendor scripts)
   return gulp.src(paths.partials)
-    .pipe(gulp.dest('./dist/partials'));
+    .pipe(gulp.dest(paths.public + '/partials'));
 });
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
   var server = livereload();
   gulp.watch([
-      paths.scripts,
-      paths.partials,
-      paths.less
-    ], ['build-dev']).on('change', function (file) {
-      server.changed(file.path);
-    });
+    paths.scripts,
+    paths.partials,
+    paths.less
+  ], ['build']).on('change', function (file) {
+    server.changed(file.path);
+  });
 });
 
 var karmaPaths = [
@@ -148,19 +173,10 @@ gulp.task('test-watch', function () {
     });
 });
 
-gulp.task('dist-dev', ['bower-files', 'scripts', 'partials', 'styles']);
-gulp.task('dist', ['bower-files-min', 'scripts-min', 'partials', 'styles-min']);
+gulp.task('dist', ['bower-files', 'scripts', 'partials', 'styles']);
 
-gulp.task('build-dev', function(callback) {
-  runSequence('clean',
-    ['dist-dev'],
-    callback);
-});
-
-gulp.task('build', function(callback) {
+gulp.task('build', function (callback) {
   runSequence('clean',
     ['dist'],
     callback);
 });
-
-gulp.task('default', ['help']);

@@ -3,7 +3,9 @@
 
   angular.module('HomeCare', [
     'HomeCare.directives',
-    'HomeCare.controllers'
+    'HomeCare.controllers',
+    'ngAnimate',
+    'mgcrea.ngStrap'
   ]);
 
 })();
