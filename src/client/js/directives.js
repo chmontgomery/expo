@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var module = angular.module('HomeCare.directives', []);
+  var module = angular.module('expo.directives', []);
 
   module.directive('navbar', function () {
     return {

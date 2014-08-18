@@ -1,9 +1,9 @@
 {
-  "name": "HomeCare",
+  "name": "expo",
   "version": "0.0.1",
-  "homepage": "https://github.com/chmontgomery/HomeCare",
+  "homepage": "https://github.com/chmontgomery/expo",
   "authors": [
-    "Chris Montgomery <christopher.montgomery@dowjones.com>"
+    "Chris Montgomery <chr.montgomery@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [

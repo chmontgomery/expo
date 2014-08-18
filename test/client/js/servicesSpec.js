@@ -2,7 +2,7 @@
 
 describe('services', function () {
 
-  beforeEach(module('HomeCare.services'));
+  beforeEach(module('expo.services'));
   beforeEach(module('TestHelper.services'));
 
   describe('patientService', function () {

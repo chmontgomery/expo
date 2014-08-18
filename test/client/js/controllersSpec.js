@@ -2,8 +2,8 @@
 
 describe('controllers', function () {
 
-  beforeEach(module('HomeCare.controllers'));
-  beforeEach(module('HomeCare.services'));
+  beforeEach(module('expo.controllers'));
+  beforeEach(module('expo.services'));
   beforeEach(module('TestHelper.services'));
 
   describe('MarCtrl', function () {

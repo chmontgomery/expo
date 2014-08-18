@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  var module = angular.module('HomeCare.controllers', [
-    'HomeCare.services'
+  var module = angular.module('expo.controllers', [
+    'expo.services'
   ]);
 
   module.controller('HomeCtrl', ['$scope', 'patientService', '$timeout',

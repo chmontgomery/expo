@@ -23,7 +23,7 @@
     return deferred.promise;
   }
 
-  angular.module('HomeCare.services', [])
+  angular.module('expo.services', [])
     .factory('patientService', ['$q', '$http',
       'scheduleService', 'medicationService',
       function ($q, $http, scheduleService, medicationService) {

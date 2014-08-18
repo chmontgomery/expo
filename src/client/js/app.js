@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('HomeCare', [
-    'HomeCare.directives',
-    'HomeCare.controllers',
+  angular.module('expo', [
+    'expo.directives',
+    'expo.controllers',
     'ngAnimate',
     'mgcrea.ngStrap'
   ]);
